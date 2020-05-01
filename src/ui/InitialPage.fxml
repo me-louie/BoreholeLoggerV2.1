@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<StackPane fx:controller="ui.InitialPageController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <HBox spacing="10" alignment="bottom_right"
+          GridPane.columnIndex="4" GridPane.rowIndex="4">
+        <Button text="Create a new project"
+                onAction="#goToProjectInfoPage"/>
+
+        <Button text="Load an existing project"/>
+    </HBox>
+
+    <stylesheets>
+        <URL value="@InitialPage.css"/>
+    </stylesheets>
+
+</StackPane>

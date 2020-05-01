@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<VBox fx:controller="ui.ProjectInfoSceneController"
+      xmlns:fx="http://javafx.com/fxml" alignment="center"
+      spacing="10">
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <Label text="Project Number"/>
+    <TextField id="pNumber" fx:id="pNumber" onAction="#submitGoToSamplePage"/>
+
+    <Label text="Project Manager"/>
+    <TextField id="pManager" fx:id="pManager" onAction="#submitGoToSamplePage"/>
+
+    <Label text="Site Address"/>
+    <TextField  id="pAddress" fx:id="pAddress" onAction="#submitGoToSamplePage"/>
+
+    <HBox spacing="10">
+        <Button text="Go Back"
+                onAction="#goToInitialPage"/>
+        <Button text="Submit"
+                onAction="#submitGoToSamplePage"/>
+    </HBox>
+
+
+
+
+    <stylesheets>
+        <URL value="@InitialPage.css"/>
+    </stylesheets>
+
+</VBox>
