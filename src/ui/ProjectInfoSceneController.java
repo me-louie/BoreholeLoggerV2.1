@@ -4,8 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.Project;
-
-import java.awt.*;
+import network.Geolocation;
 
 public class ProjectInfoSceneController implements ControlledScreen {
     @FXML public TextField pManager;
@@ -14,15 +13,8 @@ public class ProjectInfoSceneController implements ControlledScreen {
 
     private ScreensController myController;
     private Project project;
+    private Geolocation geolocation;
 
-//    @FXML
-//    private TextField pNumber;
-//
-//    @FXML
-//    private TextField pManager;
-//
-//    @FXML
-//    private TextField pAddress;
     private String test;
     
     @Override
@@ -36,7 +28,6 @@ public class ProjectInfoSceneController implements ControlledScreen {
     }
     @FXML
     public void submitGoToSamplePage(ActionEvent actionEvent){
-//        test = pAddress.getText();
         System.out.println(pNumber.getText());
         System.out.println(pManager.getText());
         System.out.println(pAddress.getText());
@@ -44,5 +35,9 @@ public class ProjectInfoSceneController implements ControlledScreen {
         project = new Project(pNumber.getText(), pManager.getText(), pAddress.getText());
 
         myController.setScreen(Main.screen3ID);
+    }
+
+    public void refreshImage(ActionEvent actionEvent) {
+        geolocation = new Geolocation(pAddress.getText());
     }
 }
