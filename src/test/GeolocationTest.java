@@ -1,13 +1,10 @@
 package test;
 
-import network.Geolocation;
+import network.GeolocationQuery;
+import network.InvalidQueryException;
+import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
-
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class GeolocationTest {
 
@@ -17,7 +14,7 @@ public class GeolocationTest {
     }
 
     @Test
-    void testConstructor(){
-        Geolocation geolocation = new Geolocation("4968 Beamish Court");
+    void testConstructor() throws JSONException, InvalidQueryException {
+        GeolocationQuery geolocation = new GeolocationQuery("4968 Beamish Court");
     }
 }

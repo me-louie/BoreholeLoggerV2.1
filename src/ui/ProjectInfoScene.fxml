@@ -2,56 +2,99 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="center" prefHeight="337.0" prefWidth="401.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ProjectInfoSceneController">
-    <padding>
-        <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
-    </padding>
-   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10">
-      <children>
-         <VBox prefWidth="100.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500" prefWidth="750" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ProjectInfoSceneController">
+    <center>
+        <VBox alignment="center" prefHeight="500" prefWidth="750" spacing="10">
+            <padding>
+                <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+            <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/blankImage.jpg" />
+                </image>
+            <cursor>
+               <Cursor fx:constant="DEFAULT" />
+            </cursor>
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </VBox.margin>
+            </ImageView>
+
+            <stylesheets>
+                <URL value="@InitialPage.css" />
+            </stylesheets>
+
+        </VBox>
+    </center>
+    <top>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10">
             <children>
-            
-                <Label text="Project Number" />
-                <TextField id="pNumber" fx:id="pNumber" onAction="#submitGoToSamplePage" />
-            </children>
-         </VBox>
-         <VBox prefHeight="200.0" prefWidth="100.0">
-            <children>
-            
-                <Label text="Project Manager" />
-                <TextField id="pManager" fx:id="pManager" onAction="#submitGoToSamplePage" />
-            </children>
-         </VBox>
-         <VBox prefHeight="200.0" prefWidth="100.0">
-            <children>
-            
-                <Label text="Site Address" />
-                <TextField id="pAddress" fx:id="pAddress" onAction="#submitGoToSamplePage" />
-            </children>
-         </VBox>
-         <Button mnemonicParsing="false" onAction="#refreshImage" text="R" />
-      </children>
-   </HBox>
-   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@images/blankImage.jpg" />
-      </image></ImageView>
+                <VBox>
+                    <children>
 
-                <HBox spacing="10">
-        <Button onAction="#goToInitialPage" text="Go Back" />
-        <Button onAction="#submitGoToSamplePage" text="Submit" />
-    </HBox>
+                        <Label text="Project Number">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField id="pNumber" fx:id="pNumber" onAction="#submitGoToSamplePage" />
+                        <Label id="latLabel" fx:id="latLabel" text="Latitude:" />
+                    </children>
+                </VBox>
+                <VBox>
+                    <children>
 
-    <stylesheets>
-        <URL value="@InitialPage.css" />
-    </stylesheets>
+                        <Label text="Project Manager">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField id="pManager" fx:id="pManager" onAction="#submitGoToSamplePage" />
+                        <Label id="longLabel" fx:id="longLabel" text="Longitude:" />
+                    </children>
+                </VBox>
+                <VBox>
+                    <children>
 
-</VBox>
+                        <Label text="Site Address">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField id="pAddress" fx:id="pAddress" onAction="#submitGoToSamplePage" />
+                        <Text id="invalidAddressPrompt" fx:id="invalidAddressPrompt" fill="#ea0909" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a valid address." />
+                    </children>
+                </VBox>
+                <Button alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#refreshImage" text="refresh map" />
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
+            </padding>
+        </HBox>
+    </top>
+    <bottom>
+
+        <HBox spacing="10" BorderPane.alignment="CENTER">
+            <Button onAction="#goToInitialPage" text="Go Back" />
+            <Button onAction="#submitGoToSamplePage" text="Submit" />
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>

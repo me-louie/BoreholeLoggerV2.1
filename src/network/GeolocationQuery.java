@@ -1,23 +1,26 @@
 package network;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Geolocation {
+
+public class GeolocationQuery {
 
     private String query;
-    private SiteMap siteMap;
     private HttpURLConnection connection = null;
-
+    private String response;
     private String targetURL;
 
-    public Geolocation(String query) {
+    public GeolocationQuery(String query) throws JSONException, InvalidQueryException {
         this.query = trimQuery(query);
         createTargetUrl();
         executeGET();
+        GeolocationParser geoParser = new GeolocationParser(this.response);
     }
 
     private void createTargetUrl(){
@@ -35,7 +38,9 @@ public class Geolocation {
     }
 
 
-    private String executeGET() {
+    // https://stackoverflow.com/questions/1359689/how-to-send-http-request-in-java
+    // sends GET request and sets response
+    private void executeGET() {
         try {
             //Create connection
             URL url = new URL(this.targetURL);
@@ -52,15 +57,20 @@ public class Geolocation {
             }
             rd.close();
             System.out.println(response.toString());
-            return response.toString();
+            this.response = response.toString();
+//            return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+//            return null;
         } finally {
             if (connection != null) {
                 connection.disconnect();
             }
         }
+    }
+
+    public String getResponse(){
+        return this.response;
     }
 
 

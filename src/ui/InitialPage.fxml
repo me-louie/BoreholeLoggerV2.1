@@ -7,8 +7,11 @@
 <?import javafx.scene.text.*?>
 
 
-<StackPane fx:controller="ui.InitialPageController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center">
+<GridPane fx:controller="ui.InitialPageController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center"
+          style="-fx-border-color: black;"
+          prefHeight="500"
+          prefWidth="750">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
@@ -25,4 +28,4 @@
         <URL value="@InitialPage.css"/>
     </stylesheets>
 
-</StackPane>
+</GridPane>
