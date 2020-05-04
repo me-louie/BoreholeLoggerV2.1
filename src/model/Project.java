@@ -1,5 +1,7 @@
 package model;
 
+import network.SiteMap;
+
 import java.util.Set;
 
 public class Project {
@@ -7,6 +9,7 @@ public class Project {
     private String number;
     private String manager;
     private String address;
+    private SiteMap siteMap;
     private Set<Borehole> boreholes;
 
     public Project(){

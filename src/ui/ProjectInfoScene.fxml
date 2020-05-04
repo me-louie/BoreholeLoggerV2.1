@@ -20,7 +20,7 @@
             <padding>
                 <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
             </padding>
-            <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="pMap" fx:id="pMap" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@images/blankImage.jpg" />
                 </image>
@@ -88,7 +88,7 @@
 
         <HBox spacing="10" BorderPane.alignment="CENTER">
             <Button onAction="#goToInitialPage" text="Go Back" />
-            <Button onAction="#submitGoToSamplePage" text="Submit" />
+            <Button alignment="TOP_LEFT" onAction="#submitGoToSamplePage" text="Submit" />
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
