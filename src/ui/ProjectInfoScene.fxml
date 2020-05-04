@@ -14,26 +14,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500" prefWidth="750" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ProjectInfoSceneController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500"
+            prefWidth="750" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ProjectInfoSceneController">
     <center>
         <VBox alignment="center" prefHeight="500" prefWidth="750" spacing="10">
             <padding>
-                <Insets bottom="10.0" left="25.0" right="25.0" top="25.0" />
+                <Insets bottom="10.0" left="25.0" right="25.0" top="25.0"/>
             </padding>
-            <ImageView id="pMap" fx:id="pMap" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="pMap" fx:id="pMap" fitHeight="350.0" fitWidth="350.0" style="-fx-border-color: black;"
+                       pickOnBounds="true" preserveRatio="true">
                 <image>
-                    <Image url="@images/blankImage.jpg" />
+                    <Image url="@images/blankImage.jpg"/>
                 </image>
-            <cursor>
-               <Cursor fx:constant="DEFAULT" />
-            </cursor>
-            <VBox.margin>
-               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </VBox.margin>
+                <cursor>
+                    <Cursor fx:constant="DEFAULT"/>
+                </cursor>
+                <VBox.margin>
+                    <Insets/>
+                </VBox.margin>
             </ImageView>
 
             <stylesheets>
-                <URL value="@InitialPage.css" />
+                <URL value="@InitialPage.css"/>
             </stylesheets>
 
         </VBox>
@@ -46,11 +49,11 @@
 
                         <Label text="Project Number">
                             <font>
-                                <Font name="System Bold" size="12.0" />
+                                <Font name="System Bold" size="14.0"/>
                             </font>
                         </Label>
-                        <TextField id="pNumber" fx:id="pNumber" onAction="#submitGoToSamplePage" />
-                        <Label id="latLabel" fx:id="latLabel" text="Latitude:" />
+                        <TextField id="pNumber" fx:id="pNumber" onAction="#submitGoToSamplePage"/>
+                        <Label id="latLabel" fx:id="latLabel" text="LATITUDE: "/>
                     </children>
                 </VBox>
                 <VBox>
@@ -58,11 +61,11 @@
 
                         <Label text="Project Manager">
                             <font>
-                                <Font name="System Bold" size="12.0" />
+                                <Font name="System Bold" size="14.0"/>
                             </font>
                         </Label>
-                        <TextField id="pManager" fx:id="pManager" onAction="#submitGoToSamplePage" />
-                        <Label id="longLabel" fx:id="longLabel" text="Longitude:" />
+                        <TextField id="pManager" fx:id="pManager" onAction="#submitGoToSamplePage"/>
+                        <Label id="longLabel" fx:id="longLabel" text="LONGITUDE: "/>
                     </children>
                 </VBox>
                 <VBox>
@@ -70,31 +73,36 @@
 
                         <Label text="Site Address">
                             <font>
-                                <Font name="System Bold" size="12.0" />
+                                <Font name="System Bold" size="14.0"/>
                             </font>
                         </Label>
-                        <TextField id="pAddress" fx:id="pAddress" onAction="#submitGoToSamplePage" />
-                        <Text id="invalidAddressPrompt" fx:id="invalidAddressPrompt" fill="#ea0909" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a valid address." />
+                        <TextField id="pAddress" fx:id="pAddress" onAction="#submitGoToSamplePage"/>
+                        <Text id="invalidAddressPrompt" fx:id="invalidAddressPrompt" fill="#ea0909" opacity="0.0"
+                              strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a valid address."/>
                     </children>
                 </VBox>
-                <Button alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#refreshImage" text="refresh map" />
+                <Button alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#refreshMapImage"
+                        text="refresh map"/>
             </children>
             <padding>
-                <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
+                <Insets bottom="20.0" left="20.0" right="10.0" top="10.0"/>
             </padding>
         </HBox>
     </top>
     <bottom>
 
-        <HBox spacing="10" BorderPane.alignment="CENTER">
-            <Button onAction="#goToInitialPage" text="Go Back" />
-            <Button alignment="TOP_LEFT" onAction="#submitGoToSamplePage" text="Submit" />
+        <HBox alignment="TOP_RIGHT" spacing="10" BorderPane.alignment="BOTTOM_LEFT">
+            <Button alignment="CENTER" onAction="#goToInitialPage" text="Go Back"/>
+            <Button alignment="CENTER" defaultButton="true" onAction="#submitGoToSamplePage" text="Submit"/>
             <opaqueInsets>
-                <Insets />
+                <Insets/>
             </opaqueInsets>
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
             </padding>
         </HBox>
     </bottom>
+    <stylesheets>
+        <URL value="@ProjectInfoScene.css"/>
+    </stylesheets>
 </BorderPane>

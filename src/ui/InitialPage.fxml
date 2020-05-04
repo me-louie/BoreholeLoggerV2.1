@@ -7,11 +7,12 @@
 <?import javafx.scene.text.*?>
 
 
-<GridPane fx:controller="ui.InitialPageController"
+<FlowPane fx:controller="ui.InitialPageController"
           xmlns:fx="http://javafx.com/fxml" alignment="center"
           style="-fx-border-color: black;"
-          prefHeight="500"
-          prefWidth="750">
+          prefWidth="300"
+          prefHeight="300"
+          styleClass="root">
     <padding>
         <Insets top="25" right="25" bottom="25" left="25"/>
     </padding>
@@ -28,4 +29,4 @@
         <URL value="@InitialPage.css"/>
     </stylesheets>
 
-</GridPane>
+</FlowPane>

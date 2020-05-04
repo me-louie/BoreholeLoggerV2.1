@@ -10,6 +10,7 @@ public class Project {
     private String manager;
     private String address;
     private SiteMap siteMap;
+
     private Set<Borehole> boreholes;
 
     public Project(){
@@ -48,5 +49,13 @@ public class Project {
 
     public void setBoreholes(Set<Borehole> boreholes) {
         this.boreholes = boreholes;
+    }
+
+    public SiteMap getSiteMap() {
+        return siteMap;
+    }
+
+    public void setSiteMap(SiteMap siteMap) {
+        this.siteMap = siteMap;
     }
 }

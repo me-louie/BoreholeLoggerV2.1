@@ -17,6 +17,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class ProjectInfoSceneController implements ControlledScreen {
+    private static final String LATITUDE = "LATITUDE: ";
+    private static final String LONGITUDE = "LONGITUDE: ";
+
     @FXML
     public TextField pManager;
     @FXML
@@ -33,7 +36,8 @@ public class ProjectInfoSceneController implements ControlledScreen {
     public ImageView pMap;
 
     private ScreensController myController;
-    private Project project;
+    private SiteMap siteMap;
+
 
 
     @Override
@@ -42,13 +46,20 @@ public class ProjectInfoSceneController implements ControlledScreen {
     }
 
 
-    public void goToInitialPage(ActionEvent actionEvent) {
-
+    public void goToInitialPage(ActionEvent actionEvent) throws FileNotFoundException {
         myController.setScreen(Main.screen1ID);
+        refreshScene();
+    }
+
+    private void refreshScene() throws FileNotFoundException {
         clearLabels();
         clearTextViews();
+        FileInputStream input = new FileInputStream("src/ui/images/blankImage.jpg");
+        Image img = new Image(input);
+        pMap.setImage(img);
         invalidAddressPrompt.setOpacity(0.0);
     }
+
 
     private void clearTextViews() {
         pNumber.clear();
@@ -57,23 +68,22 @@ public class ProjectInfoSceneController implements ControlledScreen {
     }
 
     private void clearLabels() {
-        latLabel.setText("Latitude: ");
-        longLabel.setText("Longitude: ");
+        latLabel.setText(LATITUDE);
+        longLabel.setText(LONGITUDE);
     }
 
     @FXML
+    // TODO: add to application instance
     public void submitGoToSamplePage(ActionEvent actionEvent) {
-        System.out.println(pNumber.getText());
-        System.out.println(pManager.getText());
-        System.out.println(pAddress.getText());
+        Project project = new Project(pNumber.getText(), pManager.getText(), pAddress.getText());
+        project.setSiteMap(siteMap);
 
-        project = new Project(pNumber.getText(), pManager.getText(), pAddress.getText());
 
         myController.setScreen(Main.screen3ID);
     }
 
     @FXML
-    public void refreshImage(ActionEvent actionEvent) {
+    public void refreshMapImage(ActionEvent actionEvent) {
         try {
             String query = pAddress.getText();
 
@@ -82,14 +92,11 @@ public class ProjectInfoSceneController implements ControlledScreen {
             }
             GeolocationManager geoManager = new GeolocationManager(query);
             invalidAddressPrompt.setOpacity(0.0);
-            latLabel.setText("Latitude: " + geoManager.getLatitude());
-            longLabel.setText("Longitude: " + geoManager.getLongitude());
-            System.out.println(geoManager.getLatitude());
-            System.out.println(geoManager.getLongitude());
+            latLabel.setText(LATITUDE + geoManager.getLatitude());
+            longLabel.setText(LONGITUDE + geoManager.getLongitude());
 
-            SiteMap siteMap = new SiteMap("currMap", geoManager.getLatitude(), geoManager.getLongitude());
-
-            FileInputStream input = new FileInputStream("src/ui/images/currMap.jpg");
+            siteMap = new SiteMap("map_" + pNumber.getText(), geoManager.getLatitude(), geoManager.getLongitude());
+            FileInputStream input = new FileInputStream("src/ui/images/map_" + pNumber.getText() + ".jpg");
             Image img = new Image(input);
             pMap.setImage(img);
 
