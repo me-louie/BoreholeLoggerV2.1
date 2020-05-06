@@ -3,6 +3,9 @@ package ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class InitialPageController implements ControlledScreen{
 
     ScreensController myController;
@@ -16,7 +19,12 @@ public class InitialPageController implements ControlledScreen{
     }
 
     @Override
-    public void setScreenParent(ScreensController screenPage) {
+    public void setScreenPage(ScreensController screenPage) {
         myController = screenPage;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

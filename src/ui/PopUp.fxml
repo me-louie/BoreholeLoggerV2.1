@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0"
+            prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.PopUpController">
+    <bottom>
+        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <buttons>
+                <Button id="cancelButton" fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" text="Cancel" onAction="#closePopUp"/>
+                <Button id="submitButton" fx:id="submitButton" defaultButton="true" mnemonicParsing="false" text="Submit" onAction="#setNewBHID"/>
+            </buttons>
+        </ButtonBar>
+    </bottom>
+    <center>
+        <TextField id="boreholeID" fx:id="boreholeID" text="BH" BorderPane.alignment="CENTER"/>
+    </center>
+</BorderPane>

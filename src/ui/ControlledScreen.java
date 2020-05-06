@@ -1,6 +1,8 @@
 package ui;
 
-public interface ControlledScreen {
+import javafx.fxml.Initializable;
 
-    public abstract void setScreenParent(ScreensController screenPage);
+public interface ControlledScreen extends Initializable {
+
+    public abstract void setScreenPage(ScreensController screenPage);
 }

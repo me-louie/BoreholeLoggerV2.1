@@ -15,6 +15,8 @@ import org.json.JSONException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class ProjectInfoSceneController implements ControlledScreen {
     private static final String LATITUDE = "LATITUDE: ";
@@ -41,7 +43,7 @@ public class ProjectInfoSceneController implements ControlledScreen {
 
 
     @Override
-    public void setScreenParent(ScreensController screenPage) {
+    public void setScreenPage(ScreensController screenPage) {
         this.myController = screenPage;
     }
 
@@ -79,7 +81,7 @@ public class ProjectInfoSceneController implements ControlledScreen {
         project.setSiteMap(siteMap);
 
 
-        myController.setScreen(Main.screen3ID);
+        myController.setScreen(Main.screen4ID);
     }
 
     @FXML
@@ -108,5 +110,10 @@ public class ProjectInfoSceneController implements ControlledScreen {
             clearLabels();
             invalidAddressPrompt.setOpacity(1.0);
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

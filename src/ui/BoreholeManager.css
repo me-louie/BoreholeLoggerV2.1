@@ -3,13 +3,7 @@
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
-}
-#pageTitle {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-.header-label{
     -fx-padding: 5px;
     -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
+     -fx-background-insets: 5px;
 }
