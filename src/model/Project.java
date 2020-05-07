@@ -2,6 +2,7 @@ package model;
 
 import network.SiteMap;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Project extends Subject {
@@ -10,28 +11,19 @@ public class Project extends Subject {
     private String manager;
     private String address;
     private SiteMap siteMap;
-    private String randomField = "randomField";
 
     private Set<Borehole> boreholes;
 
-    public String getRandomField() {
-        return randomField;
-    }
-
-    public void setRandomField(String randomField) {
-        this.randomField = randomField;
-    }
 
     public Project() {
+        boreholes = new HashSet<>();
     }
 
     public Project(String number, String manager, String address) {
         this.number = number;
         this.manager = manager;
         this.address = address;
-        System.out.println("New Project Created");
-        notifyObservers();
-        System.out.println("Observers notified");
+        boreholes = new HashSet<>();
     }
 
     public String getNumber() {
@@ -59,6 +51,19 @@ public class Project extends Subject {
         this.address = address;
     }
 
+    public Set<Borehole> getBoreholes() {
+        return this.boreholes;
+    }
+
+    public boolean isBhIdUnique(String id) {
+        for (Borehole bh : boreholes) {
+            if (bh.getId().equals(id)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void setBoreholes(Set<Borehole> boreholes) {
         this.boreholes = boreholes;
     }
@@ -69,5 +74,15 @@ public class Project extends Subject {
 
     public void setSiteMap(SiteMap siteMap) {
         this.siteMap = siteMap;
+    }
+
+    public void addBorehole(Borehole bh) {
+        this.boreholes.add(bh);
+    }
+
+    public void removeBorehole(Borehole bh) {
+        if (this.boreholes.contains(bh)) {
+            boreholes.remove(bh);
+        }
     }
 }
