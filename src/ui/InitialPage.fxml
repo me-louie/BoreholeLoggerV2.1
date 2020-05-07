@@ -26,7 +26,7 @@
     </HBox>
 
     <stylesheets>
-        <URL value="@InitialPage.css"/>
+        <URL value="@stylesheets/InitialPage.css"/>
     </stylesheets>
 
 </FlowPane>

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Project;
 
 public class Main extends Application {
 
@@ -15,6 +16,7 @@ public class Main extends Application {
     public static String screen3File = "SamplePage.fxml";
     public static String screen4ID = "BoreholeManager";
     public static String screen4File = "BoreholeManager.fxml";
+    public static Project project;
 
     private static Stage primaryStage;
 
@@ -28,17 +30,18 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage){
 
         this.primaryStage = primaryStage;
 
         primaryStage.setTitle("Borehole Logger Beta");
 //        primaryStage.setMaximized(true);
         ScreensController mainContainer = new ScreensController();
+
         mainContainer.loadScreen(Main.screen1ID, Main.screen1File);
         mainContainer.loadScreen(Main.screen2ID, Main.screen2File);
         mainContainer.loadScreen(Main.screen3ID, Main.screen3File);
-        mainContainer.loadScreen(Main.screen4ID, Main.screen4File);
+//        mainContainer.loadScreen(Main.screen4ID, Main.screen4File);
 
         mainContainer.setScreen(Main.screen1ID);
 

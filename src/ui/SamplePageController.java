@@ -48,6 +48,7 @@ public class SamplePageController implements ControlledScreen {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("sample page initializer");
 
     }
 }

@@ -72,6 +72,6 @@
         </VBox>
     </top>
     <stylesheets>
-        <URL value="@SamplePage.css"/>
+        <URL value="@stylesheets/SamplePage.css"/>
     </stylesheets>
 </BorderPane>

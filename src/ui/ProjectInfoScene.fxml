@@ -36,7 +36,7 @@
             </ImageView>
 
             <stylesheets>
-                <URL value="@InitialPage.css"/>
+                <URL value="@stylesheets/InitialPage.css"/>
             </stylesheets>
 
         </VBox>
@@ -103,6 +103,6 @@
         </HBox>
     </bottom>
     <stylesheets>
-        <URL value="@ProjectInfoScene.css"/>
+        <URL value="@stylesheets/ProjectInfoScene.css"/>
     </stylesheets>
 </BorderPane>

@@ -6,11 +6,14 @@ import javafx.fxml.FXML;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InitialPageController implements ControlledScreen{
+public class InitialPageController implements ControlledScreen {
 
     ScreensController myController;
 
 
+    public InitialPageController(){
+        System.out.println("Initial page controller constructed");
+    }
     @FXML
     public void goToProjectInfoPage(ActionEvent actionEvent) {
         myController.setScreen(Main.screen2ID);
@@ -25,6 +28,6 @@ public class InitialPageController implements ControlledScreen{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        System.out.println("Initial page initializer");
     }
 }

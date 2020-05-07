@@ -2,12 +2,17 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.Project;
+import model.ProjectManager;
 import network.GeolocationManager;
 import network.InvalidQueryException;
 import network.SiteMap;
@@ -15,6 +20,7 @@ import org.json.JSONException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,10 +44,14 @@ public class ProjectInfoSceneController implements ControlledScreen {
     public ImageView pMap;
 
     private ScreensController myController;
+    private ProjectManager pm;
     private SiteMap siteMap;
 
 
 
+    public ProjectInfoSceneController(){
+        System.out.println("PISC constructed");
+    }
     @Override
     public void setScreenPage(ScreensController screenPage) {
         this.myController = screenPage;
@@ -74,14 +84,25 @@ public class ProjectInfoSceneController implements ControlledScreen {
         longLabel.setText(LONGITUDE);
     }
 
-    @FXML
-    // TODO: add to application instance
-    public void submitGoToSamplePage(ActionEvent actionEvent) {
+    public void submitGoToSamplePage(ActionEvent actionEvent) throws IOException {
         Project project = new Project(pNumber.getText(), pManager.getText(), pAddress.getText());
         project.setSiteMap(siteMap);
+//
+//        Main.project = new Project(pNumber.getText(), pManager.getText(), pAddress.getText());
+//        Main.project.setSiteMap(siteMap);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BoreholeManager.fxml"));
+        Parent root = loader.load();
+        BoreholeManagerController bmc = loader.getController();
+        bmc.initData(project);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
 
 
-        myController.setScreen(Main.screen4ID);
+//        myController.setScreen(Main.screen4ID);
+
     }
 
     @FXML
@@ -114,6 +135,12 @@ public class ProjectInfoSceneController implements ControlledScreen {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("pisc initializer called");
 
     }
+
+//    @Override
+//    public void update() {
+//        pManager.setText(Main.project.getManager());
+//    }
 }

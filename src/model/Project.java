@@ -4,16 +4,25 @@ import network.SiteMap;
 
 import java.util.Set;
 
-public class Project {
+public class Project extends Subject {
 
     private String number;
     private String manager;
     private String address;
     private SiteMap siteMap;
+    private String randomField = "randomField";
 
     private Set<Borehole> boreholes;
 
-    public Project(){
+    public String getRandomField() {
+        return randomField;
+    }
+
+    public void setRandomField(String randomField) {
+        this.randomField = randomField;
+    }
+
+    public Project() {
     }
 
     public Project(String number, String manager, String address) {
@@ -21,6 +30,8 @@ public class Project {
         this.manager = manager;
         this.address = address;
         System.out.println("New Project Created");
+        notifyObservers();
+        System.out.println("Observers notified");
     }
 
     public String getNumber() {
@@ -37,10 +48,11 @@ public class Project {
 
     public void setManager(String manager) {
         this.manager = manager;
+        notifyObservers();
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(String address) {
