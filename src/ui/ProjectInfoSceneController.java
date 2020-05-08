@@ -66,7 +66,7 @@ public class ProjectInfoSceneController implements ControlledScreen {
     private void refreshScene() throws FileNotFoundException {
         clearLabels();
         clearTextViews();
-        FileInputStream input = new FileInputStream("src/ui/images/blankImage.jpg");
+        FileInputStream input = new FileInputStream("src/ui/resources.resources.images/blankImage.jpg");
         Image img = new Image(input);
         pMap.setImage(img);
         invalidAddressPrompt.setOpacity(0.0);
@@ -119,7 +119,7 @@ public class ProjectInfoSceneController implements ControlledScreen {
             longLabel.setText(LONGITUDE + geoManager.getLongitude());
 
             siteMap = new SiteMap("map_" + pNumber.getText(), geoManager.getLatitude(), geoManager.getLongitude());
-            FileInputStream input = new FileInputStream("src/ui/images/map_" + pNumber.getText() + ".jpg");
+            FileInputStream input = new FileInputStream("src/ui/resources.resources.images/map_" + pNumber.getText() + ".jpg");
             Image img = new Image(input);
             pMap.setImage(img);
 

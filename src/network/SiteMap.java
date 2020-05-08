@@ -15,7 +15,7 @@ public class SiteMap {
     private String longitude;
     private String latitude;
     private Image map = null;
-    private String saveDir = "src/ui/images";
+    private String saveDir = "src/ui/resources.resources.images";
     private String targetURL;
 
     private static final int BUFFER_SIZE = 4096;
@@ -51,7 +51,7 @@ public class SiteMap {
 
     private void loadAndSetMap() {
         try {
-            map = ImageIO.read(new File("src/ui/images/" + mapId + ".jpg"));
+            map = ImageIO.read(new File("src/ui/resources.resources.images/" + mapId + ".jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

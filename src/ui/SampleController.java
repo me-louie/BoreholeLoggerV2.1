@@ -97,7 +97,6 @@ public class SampleController {
         this.bh.addSample(sample);
         parentController.addSample(sample);
         System.out.println(GUI.project.getBoreholes().size());
-        System.out.println(GUI.project.getBorehole("BH101").getSoilSamples().size());
 
 
     }

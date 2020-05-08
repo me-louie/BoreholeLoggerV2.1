@@ -8,12 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Borehole;
 import model.SoilSample;
+import model.enums.Colour;
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +42,11 @@ public class MainScreenController implements Initializable {
     @FXML public TreeView<String> tree;
     @FXML public Button deleteBH;
 
+    //Images
+
+    private ImageView blueIcon = new ImageView();
+    private ImageView greyIcon = new ImageView();
+    private ImageView brownIcon = new ImageView();
 
 
     public void openBHPopUp(ActionEvent actionEvent) throws IOException {
@@ -93,11 +99,38 @@ public class MainScreenController implements Initializable {
             }
         });
 
+        Image blueSq =
+                new Image(getClass().getResourceAsStream("images/#5f9ea0.PNG"));
+        Image greySq = new Image(getClass().getResourceAsStream("images/#778899.PNG"));
+        Image brownSq = new Image(getClass().getResourceAsStream("images/#d2b48c.PNG"));
+
+        setIcons(blueIcon,16, 16, blueSq);
+        setIcons(greyIcon,16, 16, greySq);
+        setIcons(brownIcon,16, 16, brownSq);
+    }
+
+    private void setIcons(ImageView iv, int height, int width, Image img) {
+        iv.setFitWidth(height);
+        iv.setFitHeight(width);
+        iv.setImage(img);
     }
 
     public void addSample(SoilSample sample) {
         TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
-        selectedItem.getChildren().add(new TreeItem<String>(sample.getId()));
+        Colour c = sample.getColour();
+        ImageView icon;
+        switch(c){
+            case BLUE:
+                icon = blueIcon;
+                break;
+            case GREY:
+                icon = greyIcon;
+                break;
+            default:
+                icon = brownIcon;
+        }
+
+        selectedItem.getChildren().add(new TreeItem<String>(sample.getId(), icon));
         selectedItem.setExpanded(true);
         System.out.println(sample);
     }
@@ -141,26 +174,27 @@ public class MainScreenController implements Initializable {
             });
         }
 
-        @Override
-        public void startEdit() {
-            super.startEdit();
+//        @Override
+//        public void startEdit() {
+//            super.startEdit();
+//
+//            if (textField == null) {
+//                createTextField();
+//            }
+//            setText(null);
+//            setGraphic(textField);
+//            textField.selectAll();
+//        }
 
-            if (textField == null) {
-                createTextField();
-            }
-            setText(null);
-            setGraphic(textField);
-            textField.selectAll();
-        }
+//        @Override
+//        public void cancelEdit() {
+//            super.cancelEdit();
+//            setText((String) getItem());
+//            setGraphic(getTreeItem().getGraphic());
+//        }
 
         @Override
-        public void cancelEdit() {
-            super.cancelEdit();
-            setText((String) getItem());
-            setGraphic(getTreeItem().getGraphic());
-        }
-
-        @Override
+        // TODO: make it so that you can only right click on BHs and not samples
         public void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
 
@@ -185,20 +219,20 @@ public class MainScreenController implements Initializable {
                 }
             }
         }
-        private void createTextField() {
-            textField = new TextField(getString());
-            textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
-                @Override
-                public void handle(KeyEvent t) {
-                    if (t.getCode() == KeyCode.ENTER) {
-                        commitEdit(textField.getText());
-                    } else if (t.getCode() == KeyCode.ESCAPE) {
-                        cancelEdit();
-                    }
-                }
-            });
-        }
+//        private void createTextField() {
+//            textField = new TextField(getString());
+//            textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//
+//                @Override
+//                public void handle(KeyEvent t) {
+//                    if (t.getCode() == KeyCode.ENTER) {
+//                        commitEdit(textField.getText());
+//                    } else if (t.getCode() == KeyCode.ESCAPE) {
+//                        cancelEdit();
+//                    }
+//                }
+//            });
+//        }
 
         private String getString() {
             return getItem() == null ? "" : getItem().toString();
