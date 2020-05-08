@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SampleController">
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SampleController">
     <children>
         <BorderPane layoutX="185.0" layoutY="140.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <bottom>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <buttons>
-                        <Button mnemonicParsing="false" text="Cancel" />
-                        <Button defaultButton="true" mnemonicParsing="false" text="Submit" />
+                        <Button id="cancel" fx:id="cancel" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
+                        <Button id="submit" fx:id="submit" defaultButton="true" mnemonicParsing="false" onAction="#submitSample" text="Submit" />
+
                     </buttons>
                 </ButtonBar>
             </bottom>
@@ -34,24 +24,24 @@
                             <children>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                    <Label text="Stratigraphy" />
-                                    <RadioButton mnemonicParsing="false" text="Clay">
-                                        <toggleGroup>
-                                            <ToggleGroup fx:id="sampleStrat" />
-                                        </toggleGroup>
-                                    </RadioButton>
-                                    <RadioButton mnemonicParsing="false" text="Silt" />
-                                    <RadioButton mnemonicParsing="false" text="Silty-Sand" />
-                                    <RadioButton mnemonicParsing="false" text="Sand" />
-                                    <RadioButton mnemonicParsing="false" text="Gravel" />
+                                        <Label text="Stratigraphy" />
+                                        <RadioButton mnemonicParsing="false" text="Clay">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="sampleStrat" />
+                                            </toggleGroup>
+                                        </RadioButton>
+                                        <RadioButton mnemonicParsing="false" text="Silt" toggleGroup="$sampleStrat" />
+                                        <RadioButton mnemonicParsing="false" text="Peat" toggleGroup="$sampleStrat" />
+                                        <RadioButton mnemonicParsing="false" text="Sand" toggleGroup="$sampleStrat" />
+                                        <RadioButton mnemonicParsing="false" text="Gravel" toggleGroup="$sampleStrat" />
 
-                           </children>
-                        </VBox>
-                     </children>
-                  </Group>
-                  <Group>
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
+                                    </children>
+                                </VBox>
+                            </children>
+                        </Group>
+                        <Group>
+                            <children>
+                                <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
                                         <Label text="Colour" />
                                         <GridPane prefHeight="52.0" prefWidth="106.0">
@@ -92,36 +82,48 @@
                                             </toggleGroup>
                                         </RadioButton>
                                         <RadioButton mnemonicParsing="false" text="Moist" toggleGroup="$sampleMoisture" />
-                                        <RadioButton mnemonicParsing="false" text="Wet" toggleGroup="$sampleMoisture"  />
+                                        <RadioButton mnemonicParsing="false" text="Wet" toggleGroup="$sampleMoisture" />
                                         <RadioButton mnemonicParsing="false" text="Saturated" toggleGroup="$sampleMoisture" />
                                     </children>
                                 </VBox>
                             </children>
                         </Group>
+                        <Group>
+                            <VBox prefHeight="125.0" prefWidth="100.0">
+                                <ToggleButton id="toggle" fx:id="toggle" mnemonicParsing="false" text="Odourous?" />
+                            </VBox>
+                        </Group>
                     </children>
                 </HBox>
             </center>
-         <top>
-            <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Sample ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label text="Depth (m)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="2" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
-         </top>
+            <top>
+                <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label id="sampleIdLabel" text="Sample ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField id="sampleID" fx:id="sampleID" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label id="sampleDepthLabel" text="Depth (m)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <TextField id="begDepth" fx:id="begDepth" alignment="CENTER" prefHeight="25.0" prefWidth="45.0" />
+                        <Label text="to" />
+                        <TextField id="endDepth" fx:id="endDepth" alignment="CENTER" prefHeight="25.0" prefWidth="44.0" />
+                     </children>
+                  </HBox>
+                        <Text id="bhLocation" fx:id="bhLocation" text="Location: "/>
+                    </children>
+                </GridPane>
+            </top>
         </BorderPane>
     </children>
 </AnchorPane>

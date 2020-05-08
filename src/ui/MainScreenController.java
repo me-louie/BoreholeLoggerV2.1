@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Borehole;
+import model.SoilSample;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,7 +41,6 @@ public class MainScreenController implements Initializable {
     @FXML public TreeView<String> tree;
     @FXML public Button deleteBH;
 
-    //Controllers
 
 
     public void openBHPopUp(ActionEvent actionEvent) throws IOException {
@@ -82,6 +82,7 @@ public class MainScreenController implements Initializable {
         }
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tree.setEditable(true);
@@ -94,13 +95,20 @@ public class MainScreenController implements Initializable {
 
     }
 
+    public void addSample(SoilSample sample) {
+        TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+        selectedItem.getChildren().add(new TreeItem<String>(sample.getId()));
+        selectedItem.setExpanded(true);
+        System.out.println(sample);
+    }
+
     // https://docs.oracle.com/javafx/2/ui_controls/tree-view.htm#BABGHEHF
     private final class TextFieldTreeCellImpl extends TreeCell<String> {
 
         private TextField textField;
         private ContextMenu addSampleMenu = new ContextMenu();
 
-        public TextFieldTreeCellImpl() {
+        TextFieldTreeCellImpl() {
             MenuItem menuItem = new MenuItem("Add Sample");
             addSampleMenu.getItems().add(menuItem);
             menuItem.setOnAction(new EventHandler<ActionEvent>() {
@@ -115,7 +123,13 @@ public class MainScreenController implements Initializable {
                         stage.setTitle("Add a new Sample");
                         stage.show();
 
+
+                        String bhID = tree.getSelectionModel().getSelectedItem().getValue();
+                        Borehole bh = GUI.project.getBorehole(bhID);
+
                         SampleController sampleController = loader.getController();
+//                        sampleController.setBhLocation(bhID);
+                        sampleController.setBh(bh);
                         sampleController.setParent(MainScreenController.this);
 
 

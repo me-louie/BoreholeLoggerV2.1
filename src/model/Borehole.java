@@ -1,6 +1,7 @@
 package model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Borehole {
@@ -10,12 +11,12 @@ public class Borehole {
 
     public Borehole(String id){
         this.id = id;
-        soilSamples = null;
+        soilSamples = new ArrayList<>();
     }
 
     public Borehole(String id, List<SoilSample> soilSamples){
         this.id = id;
-        this.soilSamples = soilSamples;
+        this.soilSamples = new ArrayList<>();
     }
 
     public String getId() {
@@ -32,5 +33,9 @@ public class Borehole {
 
     public void setSoilSamples(List<SoilSample> soilSamples) {
         this.soilSamples = soilSamples;
+    }
+
+    public void addSample(SoilSample soilSample){
+        soilSamples.add(soilSample);
     }
 }

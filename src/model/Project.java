@@ -55,6 +55,15 @@ public class Project extends Subject {
         return this.boreholes;
     }
 
+    public Borehole getBorehole(String id){
+        for (Borehole bh: boreholes){
+            if (bh.getId().equals(id)){
+                return bh;
+            }
+        }
+        return null;
+    }
+
     public boolean isBhIdUnique(String id) {
         for (Borehole bh : boreholes) {
             if (bh.getId().equals(id)) {
