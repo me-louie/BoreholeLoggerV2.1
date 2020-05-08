@@ -85,4 +85,12 @@ public class Project extends Subject {
             boreholes.remove(bh);
         }
     }
+
+    public void removeBhById(String id){
+        for (Borehole bh: boreholes){
+            if (bh.getId().equals(id)){
+                boreholes.remove(bh);
+            }
+        }
+    }
 }
