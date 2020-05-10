@@ -48,6 +48,11 @@ public class MainScreenController implements Initializable {
     private ImageView greyIcon = new ImageView();
     private ImageView brownIcon = new ImageView();
 
+    private Image blueSq =
+            new Image(getClass().getResourceAsStream("images/#5f9ea0.PNG"));
+    private Image greySq = new Image(getClass().getResourceAsStream("images/#778899.PNG"));
+    private Image brownSq = new Image(getClass().getResourceAsStream("images/#d2b48c.PNG"));
+
 
     public void openBHPopUp(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBHPopUp.fxml"));
@@ -99,14 +104,14 @@ public class MainScreenController implements Initializable {
             }
         });
 
-        Image blueSq =
-                new Image(getClass().getResourceAsStream("images/#5f9ea0.PNG"));
-        Image greySq = new Image(getClass().getResourceAsStream("images/#778899.PNG"));
-        Image brownSq = new Image(getClass().getResourceAsStream("images/#d2b48c.PNG"));
-
-        setIcons(blueIcon,16, 16, blueSq);
-        setIcons(greyIcon,16, 16, greySq);
-        setIcons(brownIcon,16, 16, brownSq);
+//        Image blueSq =
+//                new Image(getClass().getResourceAsStream("images/#5f9ea0.PNG"));
+//        Image greySq = new Image(getClass().getResourceAsStream("images/#778899.PNG"));
+//        Image brownSq = new Image(getClass().getResourceAsStream("images/#d2b48c.PNG"));
+//
+//        setIcons(blueIcon,16, 16, blueSq);
+//        setIcons(greyIcon,16, 16, greySq);
+//        setIcons(brownIcon,16, 16, brownSq);
     }
 
     private void setIcons(ImageView iv, int height, int width, Image img) {
@@ -115,19 +120,28 @@ public class MainScreenController implements Initializable {
         iv.setImage(img);
     }
 
+    private ImageView setIcon(int height, int width, Image img) {
+        ImageView iv = new ImageView();
+        iv.setImage(img);
+        iv.setFitWidth(height);
+        iv.setFitHeight(width);
+        return iv;
+
+    }
+
     public void addSample(SoilSample sample) {
         TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
         Colour c = sample.getColour();
         ImageView icon;
         switch(c){
             case BLUE:
-                icon = blueIcon;
+                icon = setIcon(16, 16, blueSq);
                 break;
             case GREY:
-                icon = greyIcon;
+                icon = setIcon(16, 16, greySq);
                 break;
             default:
-                icon = brownIcon;
+                icon = setIcon(16, 16, brownSq);
         }
 
         selectedItem.getChildren().add(new TreeItem<String>(sample.getId(), icon));
