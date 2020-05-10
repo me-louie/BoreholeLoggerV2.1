@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.InvalidSampleException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -30,6 +31,8 @@ public class SampleController {
     public TextField endDepth;
 
 
+    @FXML
+    Text depthErr;
     //Buttons
     @FXML
     public Button cancel;
@@ -43,8 +46,6 @@ public class SampleController {
 
     private Borehole bh;
     private MainScreenController parentController;
-
-
 
 
     public Borehole getBh() {
@@ -62,7 +63,6 @@ public class SampleController {
     }
 
 
-
     void setParent(MainScreenController parentController) {
         this.parentController = parentController;
     }
@@ -75,31 +75,95 @@ public class SampleController {
     }
 
     public void submitSample(ActionEvent actionEvent) {
-        RadioButton selectedColour = (RadioButton) sampleColour.getSelectedToggle();
-        RadioButton selectedStrat = (RadioButton) sampleStrat.getSelectedToggle();
-        RadioButton selectedMoisture = (RadioButton) sampleMoisture.getSelectedToggle();
+        try {
+            SoilSample soilSample = new SoilSample();
+            getRadioButtonSelections(soilSample);
+            getOdour(soilSample);
+            getSampleId(soilSample);
+            getSampleDepths(soilSample);
+            this.bh.addSample(soilSample);
+            parentController.addSample(soilSample);
+            System.out.println(GUI.project.getBoreholes().size());
+        } catch (InvalidSampleException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            depthErr.setText(e.getMessage());
+            depthErr.setOpacity(1.0);
 
-        String sColour = selectedColour.getText();
-        String sStrat = selectedStrat.getText();
-        String sMoisture = selectedMoisture.getText();
-
-        Colour colour = parseColour(sColour);
-        Strat strat = parseStrat(sStrat);
-        Moisture moisture = parseMoisture(sMoisture);
-
-
-        boolean isOdourous = toggle.isSelected();
-        String id = sampleID.getText();
-        int bDepth = Integer.parseInt(begDepth.getText());
-        int eDepth = Integer.parseInt(endDepth.getText());
-
-        SoilSample sample = new SoilSample(id, bDepth, eDepth, colour, strat, moisture, isOdourous);
-        this.bh.addSample(sample);
-        parentController.addSample(sample);
-        System.out.println(GUI.project.getBoreholes().size());
-
+        }
 
     }
+
+    private void getSampleDepths(SoilSample soilSample) throws InvalidSampleException {
+        try {
+            soilSample.setBegDepth(Integer.parseInt(begDepth.getText()));
+            soilSample.setEndDepth(Integer.parseInt(endDepth.getText()));
+        } catch (NumberFormatException e){
+            throw new InvalidSampleException("Please enter a valid depth.");
+        }
+
+    }
+
+    private void getSampleId(SoilSample soilSample) throws InvalidSampleException {
+        if (sampleID.getText().equals("")){
+            throw new InvalidSampleException("Please enter a valid ID.");
+        } else {
+            soilSample.setId(sampleID.getText());
+        }
+    }
+
+    private void getOdour(SoilSample soilSample) {
+        soilSample.setOdour(toggle.isSelected());
+    }
+
+    private void getRadioButtonSelections(SoilSample soilSample) {
+            RadioButton selectedColour = (RadioButton) sampleColour.getSelectedToggle();
+            RadioButton selectedStrat = (RadioButton) sampleStrat.getSelectedToggle();
+            RadioButton selectedMoisture = (RadioButton) sampleMoisture.getSelectedToggle();
+
+            String sColour = selectedColour.getText();
+            String sStrat = selectedStrat.getText();
+            String sMoisture = selectedMoisture.getText();
+
+            soilSample.setColour(parseColour(sColour));
+            soilSample.setStrat(parseStrat(sStrat));
+            soilSample.setMoisture(parseMoisture(sMoisture));
+
+    }
+
+//    public void submitSample(ActionEvent actionEvent) {
+//        RadioButton selectedColour = (RadioButton) sampleColour.getSelectedToggle();
+//        RadioButton selectedStrat = (RadioButton) sampleStrat.getSelectedToggle();
+//        RadioButton selectedMoisture = (RadioButton) sampleMoisture.getSelectedToggle();
+//
+//        String sColour = selectedColour.getText();
+//        String sStrat = selectedStrat.getText();
+//        String sMoisture = selectedMoisture.getText();
+//
+//        Colour colour = parseColour(sColour);
+//        Strat strat = parseStrat(sStrat);
+//        Moisture moisture = parseMoisture(sMoisture);
+//
+//        int bDepth = 0;
+//        int eDepth = 0;
+//        boolean isOdourous = toggle.isSelected();
+//        String id = sampleID.getText();
+//        try {
+//            bDepth = Integer.parseInt(begDepth.getText());
+//            eDepth = Integer.parseInt(endDepth.getText());
+//        } catch (NumberFormatException e){
+//            System.out.println(e.getMessage());
+//            System.out.println("please enter valid number");
+//        }
+//
+//
+//        SoilSample sample = new SoilSample(id, bDepth, eDepth, colour, strat, moisture, isOdourous);
+//        this.bh.addSample(sample);
+//        parentController.addSample(sample);
+//        System.out.println(GUI.project.getBoreholes().size());
+//
+//
+//    }
 
     private Colour parseColour(String colour) {
         Colour sColour;

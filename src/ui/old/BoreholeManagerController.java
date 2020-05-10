@@ -1,4 +1,4 @@
-package ui;
+package ui.old;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,7 +32,7 @@ public class BoreholeManagerController implements ControlledScreen, Observer{
     public TextField pManager;
     @FXML
     public TextField pLocation;
-    private ScreensController myController;
+    private ui.old.ScreensController myController;
     private int numBH = 0;
     @FXML
     private TreeItem<String> root;

@@ -1,4 +1,4 @@
-package ui;
+package ui.old;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 
 public class InitialPageController implements ControlledScreen {
 
-    ScreensController myController;
+    ui.old.ScreensController myController;
 
 
     public InitialPageController(){

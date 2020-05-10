@@ -1,4 +1,4 @@
-package ui;
+package ui.old;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -36,7 +36,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Borehole Logger Beta");
 //        primaryStage.setMaximized(true);
-        ScreensController mainContainer = new ScreensController();
+        ui.old.ScreensController mainContainer = new ScreensController();
 
         mainContainer.loadScreen(Main.screen1ID, Main.screen1File);
         mainContainer.loadScreen(Main.screen2ID, Main.screen2File);

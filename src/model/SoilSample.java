@@ -13,6 +13,8 @@ public class SoilSample {
     private Moisture moisture;
     private boolean odour;
 
+    public SoilSample(){};
+
     public SoilSample(String id, int begDepth, int endDepth, Colour colour, Strat strat, Moisture moisture, boolean odour){
         this.id = id;
         this.begDepth = begDepth;

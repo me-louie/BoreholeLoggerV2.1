@@ -1,6 +1,6 @@
 package model;
 
-import ui.Observer;
+import ui.old.Observer;
 
 import java.util.HashSet;
 import java.util.Set;

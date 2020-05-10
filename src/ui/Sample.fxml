@@ -5,14 +5,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SampleController">
+<?import java.net.URL?>
+<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.SampleController">
     <children>
-        <BorderPane layoutX="185.0" layoutY="140.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane layoutX="185.0" layoutY="140.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <bottom>
                 <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <buttons>
-                        <Button id="cancel" fx:id="cancel" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
-                        <Button id="submit" fx:id="submit" defaultButton="true" mnemonicParsing="false" onAction="#submitSample" text="Submit" />
+                        <Button id="cancel" fx:id="cancel" mnemonicParsing="false" onAction="#closeWindow"
+                                text="Cancel"/>
+                        <Button id="submit" fx:id="submit" defaultButton="true" mnemonicParsing="false"
+                                onAction="#submitSample" text="Submit"/>
 
                     </buttons>
                 </ButtonBar>
@@ -24,16 +29,16 @@
                             <children>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                        <Label text="Stratigraphy" />
-                                        <RadioButton mnemonicParsing="false" text="Clay">
+                                        <Label text="Stratigraphy"/>
+                                        <RadioButton mnemonicParsing="false" text="Clay" selected="true">
                                             <toggleGroup>
-                                                <ToggleGroup fx:id="sampleStrat" />
+                                                <ToggleGroup fx:id="sampleStrat"/>
                                             </toggleGroup>
                                         </RadioButton>
-                                        <RadioButton mnemonicParsing="false" text="Silt" toggleGroup="$sampleStrat" />
-                                        <RadioButton mnemonicParsing="false" text="Peat" toggleGroup="$sampleStrat" />
-                                        <RadioButton mnemonicParsing="false" text="Sand" toggleGroup="$sampleStrat" />
-                                        <RadioButton mnemonicParsing="false" text="Gravel" toggleGroup="$sampleStrat" />
+                                        <RadioButton mnemonicParsing="false" text="Silt" toggleGroup="$sampleStrat"/>
+                                        <RadioButton mnemonicParsing="false" text="Peat" toggleGroup="$sampleStrat"/>
+                                        <RadioButton mnemonicParsing="false" text="Sand" toggleGroup="$sampleStrat"/>
+                                        <RadioButton mnemonicParsing="false" text="Gravel" toggleGroup="$sampleStrat"/>
 
                                     </children>
                                 </VBox>
@@ -43,28 +48,37 @@
                             <children>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                        <Label text="Colour" />
+                                        <Label text="Colour"/>
                                         <GridPane prefHeight="52.0" prefWidth="106.0">
                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.00000381469727" minWidth="10.0" prefWidth="62.666656494140625" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="63.99999364217123" minWidth="10.0" prefWidth="37.333343505859375" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.00000381469727"
+                                                                   minWidth="10.0" prefWidth="62.666656494140625"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="63.99999364217123"
+                                                                   minWidth="10.0" prefWidth="37.333343505859375"/>
                                             </columnConstraints>
                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                                             </rowConstraints>
                                             <children>
-                                                <RadioButton mnemonicParsing="false" text="Brown">
+                                                <RadioButton mnemonicParsing="false" text="Brown" selected="true">
                                                     <toggleGroup>
-                                                        <ToggleGroup fx:id="sampleColour" />
+                                                        <ToggleGroup fx:id="sampleColour"/>
                                                     </toggleGroup>
                                                 </RadioButton>
-                                                <RadioButton mnemonicParsing="false" text="Blue" toggleGroup="$sampleColour" GridPane.rowIndex="1" />
-                                                <RadioButton mnemonicParsing="false" text="Grey" toggleGroup="$sampleColour" GridPane.rowIndex="2" />
-                                                <Circle fill="TAN" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" />
-                                                <Circle fill="CADETBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Circle fill="GREY" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <RadioButton mnemonicParsing="false" text="Blue"
+                                                             toggleGroup="$sampleColour" GridPane.rowIndex="1"/>
+                                                <RadioButton mnemonicParsing="false" text="Grey"
+                                                             toggleGroup="$sampleColour" GridPane.rowIndex="2"/>
+                                                <Circle fill="TAN" radius="10.0" stroke="BLACK" strokeType="INSIDE"
+                                                        strokeWidth="0.0" GridPane.columnIndex="1"/>
+                                                <Circle fill="CADETBLUE" radius="10.0" stroke="BLACK"
+                                                        strokeType="INSIDE" strokeWidth="0.0" GridPane.columnIndex="1"
+                                                        GridPane.rowIndex="1"/>
+                                                <Circle fill="GREY" radius="10.0" stroke="BLACK" strokeType="INSIDE"
+                                                        strokeWidth="0.0" GridPane.columnIndex="1"
+                                                        GridPane.rowIndex="2"/>
                                             </children>
                                         </GridPane>
                                     </children>
@@ -75,22 +89,24 @@
                             <children>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                        <Label text="Moisture Content" />
-                                        <RadioButton mnemonicParsing="false" text="Dry">
+                                        <Label text="Moisture Content"/>
+                                        <RadioButton mnemonicParsing="false" text="Dry" selected="true">
                                             <toggleGroup>
-                                                <ToggleGroup fx:id="sampleMoisture" />
+                                                <ToggleGroup fx:id="sampleMoisture"/>
                                             </toggleGroup>
                                         </RadioButton>
-                                        <RadioButton mnemonicParsing="false" text="Moist" toggleGroup="$sampleMoisture" />
-                                        <RadioButton mnemonicParsing="false" text="Wet" toggleGroup="$sampleMoisture" />
-                                        <RadioButton mnemonicParsing="false" text="Saturated" toggleGroup="$sampleMoisture" />
+                                        <RadioButton mnemonicParsing="false" text="Moist"
+                                                     toggleGroup="$sampleMoisture"/>
+                                        <RadioButton mnemonicParsing="false" text="Wet" toggleGroup="$sampleMoisture"/>
+                                        <RadioButton mnemonicParsing="false" text="Saturated"
+                                                     toggleGroup="$sampleMoisture"/>
                                     </children>
                                 </VBox>
                             </children>
                         </Group>
                         <Group>
                             <VBox prefHeight="125.0" prefWidth="100.0">
-                                <ToggleButton id="toggle" fx:id="toggle" mnemonicParsing="false" text="Odourous?" />
+                                <ToggleButton id="toggle" fx:id="toggle" mnemonicParsing="false" text="Odourous?"/>
                             </VBox>
                         </Group>
                     </children>
@@ -99,31 +115,41 @@
             <top>
                 <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <children>
-                        <Label id="sampleIdLabel" text="Sample ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField id="sampleID" fx:id="sampleID" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label id="sampleDepthLabel" text="Depth (m)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <children>
-                        <TextField id="begDepth" fx:id="begDepth" alignment="CENTER" prefHeight="25.0" prefWidth="45.0" />
-                        <Label text="to" />
-                        <TextField id="endDepth" fx:id="endDepth" alignment="CENTER" prefHeight="25.0" prefWidth="44.0" />
-                     </children>
-                  </HBox>
+                        <Label id="sampleIdLabel" text="Sample ID" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextField id="sampleID" fx:id="sampleID" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        <Label id="sampleDepthLabel" text="Depth (m)" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2"
+                              GridPane.rowIndex="2">
+                            <children>
+                                <TextField id="begDepth" fx:id="begDepth" alignment="CENTER" prefHeight="25.0"
+                                           prefWidth="45.0"/>
+                                <Label text="to"/>
+                                <TextField id="endDepth" fx:id="endDepth" alignment="CENTER" prefHeight="25.0"
+                                           prefWidth="44.0"/>
+                            </children>
+                        </HBox>
                         <Text id="bhLocation" fx:id="bhLocation" text="Location: "/>
+                        <Text id="depthErr" fx:id="depthErr" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter a valid number."
+                              opacity="0.0"
+                              GridPane.columnIndex="2" GridPane.rowIndex="3"/>
                     </children>
                 </GridPane>
             </top>
         </BorderPane>
     </children>
+    <stylesheets>
+        <URL value="@stylesheets/Sample.css"/>
+    </stylesheets>
 </AnchorPane>

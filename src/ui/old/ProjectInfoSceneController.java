@@ -1,4 +1,4 @@
-package ui;
+package ui.old;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,7 +43,7 @@ public class ProjectInfoSceneController implements ControlledScreen {
     @FXML
     public ImageView pMap;
 
-    private ScreensController myController;
+    private ui.old.ScreensController myController;
     private ProjectManager pm;
     private SiteMap siteMap;
 
