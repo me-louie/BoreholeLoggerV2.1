@@ -10,12 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Borehole;
 import model.SoilSample;
 import model.enums.Colour;
+import network.GeolocationManager;
+import network.InvalidQueryException;
+import network.SiteMap;
+import org.json.JSONException;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,10 +43,20 @@ public class MainScreenController implements Initializable {
     @FXML public TextField pAddress;
     @FXML public TextField pManager;
     @FXML public TextField pNumber;
+    @FXML public TextField addressSearchField;
+
+    //Text
+    @FXML public Text addressErr;
+    @FXML public Text lat;
+    @FXML public Text lon;
+
 
     //Tree
     @FXML public TreeItem<String> root;
     @FXML public TreeView<String> tree;
+
+    //ImageView
+    @FXML public ImageView sMap;
 
 
     //Images
@@ -48,6 +65,8 @@ public class MainScreenController implements Initializable {
     private Image greySq = new Image(getClass().getResourceAsStream("images/#778899.PNG"));
     private Image brownSq = new Image(getClass().getResourceAsStream("images/#d2b48c.PNG"));
 
+    private static final String LATITUDE = "LATITUDE: ";
+    private static final String LONGITUDE = "LONGITUDE: ";
 
     public void openBHPopUp(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBHPopUp.fxml"));
@@ -129,6 +148,33 @@ public class MainScreenController implements Initializable {
         selectedItem.setExpanded(true);
         System.out.println(sample);
     }
+
+    public void refreshMap(ActionEvent actionEvent) {
+        try {
+            String query = addressSearchField.getText();
+
+            if (query.equals("")) {
+                throw new InvalidQueryException("Query cannot be blank");
+            }
+            GeolocationManager geoManager = new GeolocationManager(query);
+            addressErr.setOpacity(0.0);
+            lat.setText(LATITUDE + geoManager.getLatitude());
+            lon.setText(LONGITUDE + geoManager.getLongitude());
+
+            SiteMap siteMap = new SiteMap("map", geoManager.getLatitude(), geoManager.getLongitude());
+            FileInputStream input = new FileInputStream("src/resources/maps/" + "map" + ".jpg");
+            Image img = new Image(input);
+            sMap.setImage(img);
+
+            GUI.project.setSiteMap(siteMap);
+        } catch (InvalidQueryException | JSONException | FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Invalid address! Please enter a valid address");
+//            clearLabels();
+//            invalidAddressPrompt.setOpacity(1.0);
+        }
+    }
+
 
     // https://docs.oracle.com/javafx/2/ui_controls/tree-view.htm#BABGHEHF
     private final class TextFieldTreeCellImpl extends TreeCell<String> {

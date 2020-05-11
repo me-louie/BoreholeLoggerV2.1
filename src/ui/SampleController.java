@@ -84,11 +84,13 @@ public class SampleController {
             this.bh.addSample(soilSample);
             parentController.addSample(soilSample);
             System.out.println(GUI.project.getBoreholes().size());
+            depthErr.setOpacity(0.0);
         } catch (InvalidSampleException e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             depthErr.setText(e.getMessage());
             depthErr.setOpacity(1.0);
+
 
         }
 
