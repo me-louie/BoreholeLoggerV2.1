@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import model.Project;
 import model.ProjectManager;
 import network.GeolocationManager;
-import network.InvalidQueryException;
+import exceptions.InvalidQueryException;
 import network.SiteMap;
 import org.json.JSONException;
 

@@ -1,4 +1,4 @@
-package network;
+package exceptions;
 
 public class InvalidQueryException extends Exception{
 

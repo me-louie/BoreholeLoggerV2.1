@@ -14,11 +14,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Borehole;
+import model.Coordinates;
 import model.SoilSample;
 import model.enums.Colour;
 import network.GeolocationManager;
-import network.InvalidQueryException;
+import exceptions.InvalidQueryException;
 import network.SiteMap;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
 import java.io.FileInputStream;
@@ -151,28 +153,51 @@ public class MainScreenController implements Initializable {
 
     public void refreshMap(ActionEvent actionEvent) {
         try {
-            String query = addressSearchField.getText();
+            String query = getAddressQuery();
+            Coordinates coordinates = getLatLon(query);
+            setLatLonText(coordinates);
+            Image mapImg = getSetMapImg(coordinates);
 
-            if (query.equals("")) {
-                throw new InvalidQueryException("Query cannot be blank");
-            }
-            GeolocationManager geoManager = new GeolocationManager(query);
-            addressErr.setOpacity(0.0);
-            lat.setText(LATITUDE + geoManager.getLatitude());
-            lon.setText(LONGITUDE + geoManager.getLongitude());
+            sMap.setImage(mapImg);
 
-            SiteMap siteMap = new SiteMap("map", geoManager.getLatitude(), geoManager.getLongitude());
-            FileInputStream input = new FileInputStream("src/resources/maps/" + "map" + ".jpg");
-            Image img = new Image(input);
-            sMap.setImage(img);
-
-            GUI.project.setSiteMap(siteMap);
         } catch (InvalidQueryException | JSONException | FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Invalid address! Please enter a valid address");
+            System.out.println(e);
 //            clearLabels();
 //            invalidAddressPrompt.setOpacity(1.0);
         }
+    }
+
+    private Image getSetMapImg(Coordinates coordinates) throws FileNotFoundException {
+        SiteMap siteMap = new SiteMap("map", coordinates.getLat(), coordinates.getLon());
+        GUI.project.setSiteMap(siteMap);
+
+        FileInputStream input = new FileInputStream("src/resources/maps/" + "map" + ".jpg");
+        return new Image(input);
+
+    }
+
+    private void setLatLonText(Coordinates coordinates) {
+        lat.setText(LATITUDE + coordinates.getLat());
+        lon.setText(LONGITUDE + coordinates.getLon());
+    }
+
+    @NotNull
+    private Coordinates getLatLon(String query) throws JSONException, InvalidQueryException {
+        GeolocationManager geoManager = new GeolocationManager(query);
+        Coordinates coordinates = geoManager.getCoordinates();
+        addressErr.setOpacity(0.0);
+
+        return coordinates;
+    }
+
+    @NotNull
+    private String getAddressQuery() throws InvalidQueryException {
+        String query = addressSearchField.getText();
+        if (query.equals("")) {
+            throw new InvalidQueryException("Query cannot be blank");
+        }
+        return query;
     }
 
 

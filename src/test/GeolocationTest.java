@@ -1,7 +1,7 @@
 package test;
 
 import network.GeolocationQuery;
-import network.InvalidQueryException;
+import exceptions.InvalidQueryException;
 import org.json.JSONException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
