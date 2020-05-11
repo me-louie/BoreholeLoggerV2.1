@@ -15,7 +15,6 @@
                                     <buttons>
                                         <Button id="addBH" fx:id="addBH" mnemonicParsing="false" onAction="#openBHPopUp" text="New Location" />
                                         <Button id="deleteBH" fx:id="deleteBH" mnemonicParsing="false" onAction="#removeBH" text="Delete Location" />
-                                        <Button id="clearBH" fx:id="clearBH" mnemonicParsing="false" text="Clear All" />
                                         <Button id="saveAll" fx:id="saveAll" defaultButton="true" mnemonicParsing="false" text="Save" />
 
                                     </buttons>

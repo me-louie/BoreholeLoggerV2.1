@@ -38,4 +38,14 @@ public class Borehole {
     public void addSample(SoilSample soilSample){
         soilSamples.add(soilSample);
     }
+
+    public void removeSampleById(String id){
+        for (SoilSample ss: soilSamples){
+            if (ss.getId().equals(id)){
+                soilSamples.remove(ss);
+                System.out.println("# of soil samples: " + soilSamples.size());
+                return;
+            }
+        }
+    }
 }

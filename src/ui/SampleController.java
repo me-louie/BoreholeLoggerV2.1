@@ -52,7 +52,7 @@ public class SampleController {
         return this.bh;
     }
 
-    public void setBh(Borehole bh) {
+    void setBh(Borehole bh) {
         this.bh = bh;
         setBhLabel(bh.getId());
 

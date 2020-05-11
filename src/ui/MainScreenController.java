@@ -23,8 +23,8 @@ import java.util.ResourceBundle;
 public class MainScreenController implements Initializable {
     //Buttons
     @FXML public Button addBH;
-    @FXML public Button clearBH;
     @FXML public Button saveAll;
+    @FXML public Button deleteBH;
 
     //Labels
     @FXML public Label addressLabel;
@@ -40,14 +40,9 @@ public class MainScreenController implements Initializable {
     //Tree
     @FXML public TreeItem<String> root;
     @FXML public TreeView<String> tree;
-    @FXML public Button deleteBH;
+
 
     //Images
-
-    private ImageView blueIcon = new ImageView();
-    private ImageView greyIcon = new ImageView();
-    private ImageView brownIcon = new ImageView();
-
     private Image blueSq =
             new Image(getClass().getResourceAsStream("images/#5f9ea0.PNG"));
     private Image greySq = new Image(getClass().getResourceAsStream("images/#778899.PNG"));
@@ -70,7 +65,7 @@ public class MainScreenController implements Initializable {
 
     void addBHToTree(String id) {
             GUI.project.getBoreholes().add(new Borehole(id));
-            TreeItem<String> newBH = new TreeItem<>(id);
+            BHTreeItem<String> newBH = new BHTreeItem<>(id);
             root.getChildren().add(newBH);
             root.setExpanded(true);
             tree.setRoot(root);
@@ -79,7 +74,7 @@ public class MainScreenController implements Initializable {
     }
 
     public void removeBH(ActionEvent actionEvent) {
-        TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+        BHTreeItem<String> selectedItem = (BHTreeItem<String>) tree.getSelectionModel().getSelectedItem();
         if (selectedItem == null){
             System.out.println("nothing to remove!");
         } else if (selectedItem == root) {
@@ -104,20 +99,6 @@ public class MainScreenController implements Initializable {
             }
         });
 
-//        Image blueSq =
-//                new Image(getClass().getResourceAsStream("images/#5f9ea0.PNG"));
-//        Image greySq = new Image(getClass().getResourceAsStream("images/#778899.PNG"));
-//        Image brownSq = new Image(getClass().getResourceAsStream("images/#d2b48c.PNG"));
-//
-//        setIcons(blueIcon,16, 16, blueSq);
-//        setIcons(greyIcon,16, 16, greySq);
-//        setIcons(brownIcon,16, 16, brownSq);
-    }
-
-    private void setIcons(ImageView iv, int height, int width, Image img) {
-        iv.setFitWidth(height);
-        iv.setFitHeight(width);
-        iv.setImage(img);
     }
 
     private ImageView setIcon(int height, int width, Image img) {
@@ -130,7 +111,7 @@ public class MainScreenController implements Initializable {
     }
 
     public void addSample(SoilSample sample) {
-        TreeItem<String> selectedItem = tree.getSelectionModel().getSelectedItem();
+        BHTreeItem<String> selectedItem = (BHTreeItem<String>) tree.getSelectionModel().getSelectedItem();
         Colour c = sample.getColour();
         ImageView icon;
         switch(c){
@@ -144,7 +125,7 @@ public class MainScreenController implements Initializable {
                 icon = setIcon(16, 16, brownSq);
         }
 
-        selectedItem.getChildren().add(new TreeItem<String>(sample.getId(), icon));
+        selectedItem.getChildren().add(new SampleTreeItem<String>(sample.getId(), icon));
         selectedItem.setExpanded(true);
         System.out.println(sample);
     }
@@ -154,11 +135,12 @@ public class MainScreenController implements Initializable {
 
         private TextField textField;
         private ContextMenu addSampleMenu = new ContextMenu();
+        private ContextMenu removeSampleMenu = new ContextMenu();
 
         TextFieldTreeCellImpl() {
-            MenuItem menuItem = new MenuItem("Add Sample");
-            addSampleMenu.getItems().add(menuItem);
-            menuItem.setOnAction(new EventHandler<ActionEvent>() {
+            MenuItem add = new MenuItem("Add Sample");
+            addSampleMenu.getItems().add(add);
+            add.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Sample.fxml"));
@@ -175,7 +157,6 @@ public class MainScreenController implements Initializable {
                         Borehole bh = GUI.project.getBorehole(bhID);
 
                         SampleController sampleController = loader.getController();
-//                        sampleController.setBhLocation(bhID);
                         sampleController.setBh(bh);
                         sampleController.setParent(MainScreenController.this);
 
@@ -186,6 +167,25 @@ public class MainScreenController implements Initializable {
 
                 }
             });
+
+            MenuItem remove = new MenuItem("Remove Sample");
+            removeSampleMenu.getItems().add(remove);
+            remove.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    String bhId = tree.getSelectionModel().getSelectedItem().getParent().getValue();
+                    String sampleID = tree.getSelectionModel().getSelectedItem().getValue();
+
+                    System.out.println("parent BH is: " + bhId);
+                    System.out.println("sample id is: " + sampleID);
+                    Borehole bh = GUI.project.getBorehole(bhId);
+                    bh.removeSampleById(sampleID);
+
+                    SampleTreeItem<String> selectedItem = (SampleTreeItem<String>) tree.getSelectionModel().getSelectedItem();
+                    selectedItem.getParent().getChildren().remove(selectedItem);
+                }
+            });
+
         }
 
 //        @Override
@@ -225,10 +225,10 @@ public class MainScreenController implements Initializable {
                 } else {
                     setText(getString());
                     setGraphic(getTreeItem().getGraphic());
-                    if (
-                            getTreeItem().isLeaf()&&getTreeItem().getParent()!= null
-                    ){
+                    if (getTreeItem().getClass()==BHTreeItem.class &&getTreeItem().getParent()!= null){
                         setContextMenu(addSampleMenu);
+                    } else if (getTreeItem().getClass()==SampleTreeItem.class &&getTreeItem().getClass()!=null){
+                        setContextMenu(removeSampleMenu);
                     }
                 }
             }
