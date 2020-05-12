@@ -1,6 +1,10 @@
 package model;
 
+import com.google.gson.Gson;
 import network.SiteMap;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ProjectManager {
     private Project project;
@@ -28,5 +32,24 @@ public class ProjectManager {
 
     public void setSiteMap(SiteMap siteMap) {
         this.siteMap = siteMap;
+    }
+
+    public void saveProject() throws IOException {
+        FileWriter file = new FileWriter("src/data/myProject.txt");
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(project);
+            System.out.println(json);
+
+            file.write(json);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            file.flush();
+            file.close();
+        }
+
+
     }
 }

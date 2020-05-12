@@ -1,6 +1,5 @@
 package ui;
 
-import com.google.gson.Gson;
 import exceptions.InvalidProjectFieldException;
 import exceptions.InvalidQueryException;
 import javafx.beans.value.ChangeListener;
@@ -242,17 +241,32 @@ public class MainScreenController implements Initializable {
         return query;
     }
 
+    //    public void saveProject(ActionEvent actionEvent) throws IOException {
+//        FileWriter file = new FileWriter("src/data/myProject.txt");
+//        try {
+//            setProjectFields();
+//            Gson gson = new Gson();
+//            String json = gson.toJson(project);
+//            System.out.println(json);
+//
+//            file.write(json);
+//
+//        } catch (InvalidProjectFieldException e) {
+//            System.out.println(e.getMessage());
+//        } finally {
+//            file.flush();
+//            file.close();
+//        }
+//
+//
+//    }
     public void saveProject(ActionEvent actionEvent) {
         try {
             setProjectFields();
-            Gson gson = new Gson();
-            String json = gson.toJson(project);
-            System.out.println(json);
-        } catch (InvalidProjectFieldException e) {
+            GUI.pm.saveProject();
+        } catch (InvalidProjectFieldException | IOException e){
             System.out.println(e.getMessage());
         }
-
-
     }
 
     private void setProjectFields() throws InvalidProjectFieldException {
@@ -373,7 +387,6 @@ public class MainScreenController implements Initializable {
 //        }
 
         @Override
-        // TODO: make it so that you can only right click on BHs and not samples
         public void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
 
