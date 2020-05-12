@@ -5,14 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Project;
+import model.ProjectManager;
 
 import java.io.IOException;
 
 public class GUI extends Application {
 
-    public static Project project = new Project();
+//    public static Project project = new Project();
 
+    public static ProjectManager pm = new ProjectManager();
     public static void main(String[] args) {
         launch(args);
     }

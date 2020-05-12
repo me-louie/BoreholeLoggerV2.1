@@ -3,16 +3,21 @@ package ui;
 import exceptions.InvalidSampleException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Borehole;
+import model.Project;
 import model.SoilSample;
 import model.enums.Colour;
 import model.enums.Moisture;
 import model.enums.Strat;
 
-public class SampleController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SampleController implements Initializable {
 
     // Toggle Groups
     @FXML
@@ -46,6 +51,7 @@ public class SampleController {
 
     private Borehole bh;
     private MainScreenController parentController;
+    private Project project;
 
 
     public Borehole getBh() {
@@ -74,6 +80,11 @@ public class SampleController {
         stage.close();
     }
 
+    public void initialize(URL location, ResourceBundle resources){
+        this.project = GUI.pm.getProject();
+
+    }
+
     public void submitSample(ActionEvent actionEvent) {
         try {
             SoilSample soilSample = new SoilSample();
@@ -83,7 +94,7 @@ public class SampleController {
             getSampleDepths(soilSample);
             this.bh.addSample(soilSample);
             parentController.addSample(soilSample);
-            System.out.println(GUI.project.getBoreholes().size());
+            System.out.println(this.project.getBoreholes().size());
             depthErr.setOpacity(0.0);
         } catch (InvalidSampleException e) {
             e.printStackTrace();

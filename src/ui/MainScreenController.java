@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Borehole;
 import model.Coordinates;
+import model.Project;
 import model.SoilSample;
 import model.enums.Colour;
 import network.GeolocationManager;
@@ -94,6 +95,8 @@ public class MainScreenController implements Initializable {
 
     private static final String LATITUDE = "LATITUDE: ";
     private static final String LONGITUDE = "LONGITUDE: ";
+    private Project project;
+//    private SiteMap siteMap;
 
     public void openBHPopUp(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("NewBHPopUp.fxml"));
@@ -110,12 +113,12 @@ public class MainScreenController implements Initializable {
     }
 
     void addBHToTree(String id) {
-        GUI.project.getBoreholes().add(new Borehole(id));
+        this.project.getBoreholes().add(new Borehole(id));
         BHTreeItem<String> newBH = new BHTreeItem<>(id);
         root.getChildren().add(newBH);
         root.setExpanded(true);
         tree.setRoot(root);
-        System.out.println("# bhs: " + GUI.project.getBoreholes().size());
+        System.out.println("# bhs: " + this.project.getBoreholes().size());
 
     }
 
@@ -128,8 +131,8 @@ public class MainScreenController implements Initializable {
         } else {
             System.out.println(selectedItem.getValue());
             root.getChildren().remove(selectedItem);
-            GUI.project.removeBhById(selectedItem.getValue());
-            System.out.println("# bhs:" + GUI.project.getBoreholes().size());
+            this.project.removeBhById(selectedItem.getValue());
+            System.out.println("# bhs:" + this.project.getBoreholes().size());
 
         }
     }
@@ -137,6 +140,9 @@ public class MainScreenController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.project = GUI.pm.getProject();
+//        this.siteMap = GUI.pm.getSiteMap();
+
         tree.setEditable(true);
         tree.setCellFactory(new Callback<TreeView<String>, TreeCell<String>>() {
             @Override
@@ -206,7 +212,7 @@ public class MainScreenController implements Initializable {
 
     private Image getSetMapImg(Coordinates coordinates) throws FileNotFoundException {
         SiteMap siteMap = new SiteMap("map", coordinates.getLat(), coordinates.getLon());
-        GUI.project.setSiteMap(siteMap);
+        GUI.pm.setSiteMap(siteMap);
 
         FileInputStream input = new FileInputStream("src/resources/maps/" + "map" + ".jpg");
         return new Image(input);
@@ -240,7 +246,7 @@ public class MainScreenController implements Initializable {
         try {
             setProjectFields();
             Gson gson = new Gson();
-            String json = gson.toJson(GUI.project);
+            String json = gson.toJson(project);
             System.out.println(json);
         } catch (InvalidProjectFieldException e) {
             System.out.println(e.getMessage());
@@ -258,7 +264,7 @@ public class MainScreenController implements Initializable {
     private void setProjectNumber() throws InvalidProjectFieldException {
         String number = pNumber.getText();
         if (!isEmptyString(number)) {
-            GUI.project.setNumber(number);
+            this.project.setNumber(number);
         } else {
             throw new InvalidProjectFieldException("Please enter a valid project number.");
         }
@@ -267,7 +273,7 @@ public class MainScreenController implements Initializable {
     private void setProjectManager() throws InvalidProjectFieldException {
         String manager = pManager.getText();
         if (!isEmptyString(manager)) {
-            GUI.project.setManager(manager);
+            this.project.setManager(manager);
         } else {
             throw new InvalidProjectFieldException("Please enter a valid project manager");
         }
@@ -277,7 +283,7 @@ public class MainScreenController implements Initializable {
         try {
             LocalDate date = dateField.getValue();
             System.out.println(date);
-            GUI.project.setDate(date);
+            this.project.setDate(date);
         } catch (Exception e) {
             throw new InvalidProjectFieldException("Please enter a valid project date");
         }
@@ -313,7 +319,7 @@ public class MainScreenController implements Initializable {
 
 
                         String bhID = tree.getSelectionModel().getSelectedItem().getValue();
-                        Borehole bh = GUI.project.getBorehole(bhID);
+                        Borehole bh = MainScreenController.this.project.getBorehole(bhID);
 
                         SampleController sampleController = loader.getController();
                         sampleController.setBh(bh);
@@ -337,7 +343,7 @@ public class MainScreenController implements Initializable {
 
                     System.out.println("parent BH is: " + bhId);
                     System.out.println("sample id is: " + sampleID);
-                    Borehole bh = GUI.project.getBorehole(bhId);
+                    Borehole bh = MainScreenController.this.project.getBorehole(bhId);
                     bh.removeSampleById(sampleID);
 
                     SampleTreeItem<String> selectedItem = (SampleTreeItem<String>) tree.getSelectionModel().getSelectedItem();

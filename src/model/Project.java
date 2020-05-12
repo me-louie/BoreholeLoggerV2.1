@@ -1,7 +1,5 @@
 package model;
 
-import network.SiteMap;
-
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,13 +9,17 @@ public class Project {
     private String number;
     private String manager;
     private String address;
-    private SiteMap siteMap;
+//    private SiteMap siteMap;
     private LocalDate date;
 
     private Set<Borehole> boreholes ;
 
 
     public Project() {
+        System.out.println("New project created");
+        number = "";
+        manager = "";
+        address = "";
         boreholes = new HashSet<>();
     }
 
@@ -87,13 +89,13 @@ public class Project {
         this.boreholes = boreholes;
     }
 
-    public SiteMap getSiteMap() {
-        return siteMap;
-    }
-
-    public void setSiteMap(SiteMap siteMap) {
-        this.siteMap = siteMap;
-    }
+//    public SiteMap getSiteMap() {
+//        return siteMap;
+//    }
+//
+//    public void setSiteMap(SiteMap siteMap) {
+//        this.siteMap = siteMap;
+//    }
 
     public void addBorehole(Borehole bh) {
         this.boreholes.add(bh);
