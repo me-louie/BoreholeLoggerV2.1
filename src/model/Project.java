@@ -2,17 +2,19 @@ package model;
 
 import network.SiteMap;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Project extends Subject {
+public class Project {
 
     private String number;
     private String manager;
     private String address;
     private SiteMap siteMap;
+    private LocalDate date;
 
-    private Set<Borehole> boreholes;
+    private Set<Borehole> boreholes ;
 
 
     public Project() {
@@ -23,7 +25,16 @@ public class Project extends Subject {
         this.number = number;
         this.manager = manager;
         this.address = address;
-        boreholes = new HashSet<>();
+        this.date = null;
+        this.boreholes = new HashSet<>();
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getNumber() {
@@ -34,13 +45,12 @@ public class Project extends Subject {
         this.number = number;
     }
 
-    public String getManager() {
-        return manager;
-    }
-
     public void setManager(String manager) {
         this.manager = manager;
-        notifyObservers();
+    }
+
+    public String getManager() {
+        return manager;
     }
 
     public String getAddress() {
@@ -101,5 +111,10 @@ public class Project extends Subject {
                 boreholes.remove(bh);
             }
         }
+    }
+
+    public void save(){
+
+
     }
 }

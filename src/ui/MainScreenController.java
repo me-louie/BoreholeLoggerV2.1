@@ -1,5 +1,8 @@
 package ui;
 
+import com.google.gson.Gson;
+import exceptions.InvalidProjectFieldException;
+import exceptions.InvalidQueryException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -20,7 +23,6 @@ import model.Coordinates;
 import model.SoilSample;
 import model.enums.Colour;
 import network.GeolocationManager;
-import exceptions.InvalidQueryException;
 import network.SiteMap;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -29,38 +31,59 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
     //Buttons
-    @FXML public Button addBH;
-    @FXML public Button saveAll;
-    @FXML public Button deleteBH;
+    @FXML
+    public Button addBH;
+    @FXML
+    public Button saveAll;
+    @FXML
+    public Button deleteBH;
 
     //Labels
-    @FXML public Label addressLabel;
-    @FXML public Label managerLabel;
-    @FXML public Label numberLabel;
+    @FXML
+    public Label addressLabel;
+    @FXML
+    public Label managerLabel;
+    @FXML
+    public Label numberLabel;
 
 
     //TextFields
-    @FXML public TextField pAddress;
-    @FXML public TextField pManager;
-    @FXML public TextField pNumber;
-    @FXML public TextField addressSearchField;
+    @FXML
+    public TextField pAddress;
+    @FXML
+    public TextField pManager;
+    @FXML
+    public TextField pNumber;
+    @FXML
+    public TextField addressSearchField;
 
     //Text
-    @FXML public Text addressErr;
-    @FXML public Text lat;
-    @FXML public Text lon;
+    @FXML
+    public Text addressErr;
+    @FXML
+    public Text lat;
+    @FXML
+    public Text lon;
 
 
     //Tree
-    @FXML public TreeItem<String> root;
-    @FXML public TreeView<String> tree;
+    @FXML
+    public TreeItem<String> root;
+    @FXML
+    public TreeView<String> tree;
 
     //ImageView
-    @FXML public ImageView sMap;
+    @FXML
+    public ImageView sMap;
+
+    //DatePicker
+    @FXML
+    public DatePicker dateField;
 
 
     //Images
@@ -87,18 +110,18 @@ public class MainScreenController implements Initializable {
     }
 
     void addBHToTree(String id) {
-            GUI.project.getBoreholes().add(new Borehole(id));
-            BHTreeItem<String> newBH = new BHTreeItem<>(id);
-            root.getChildren().add(newBH);
-            root.setExpanded(true);
-            tree.setRoot(root);
-            System.out.println("# bhs: " + GUI.project.getBoreholes().size());
+        GUI.project.getBoreholes().add(new Borehole(id));
+        BHTreeItem<String> newBH = new BHTreeItem<>(id);
+        root.getChildren().add(newBH);
+        root.setExpanded(true);
+        tree.setRoot(root);
+        System.out.println("# bhs: " + GUI.project.getBoreholes().size());
 
     }
 
     public void removeBH(ActionEvent actionEvent) {
         BHTreeItem<String> selectedItem = (BHTreeItem<String>) tree.getSelectionModel().getSelectedItem();
-        if (selectedItem == null){
+        if (selectedItem == null) {
             System.out.println("nothing to remove!");
         } else if (selectedItem == root) {
             System.out.println("can't remove the root!");
@@ -149,7 +172,7 @@ public class MainScreenController implements Initializable {
         BHTreeItem<String> selectedItem = (BHTreeItem<String>) tree.getSelectionModel().getSelectedItem();
         Colour c = sample.getColour();
         ImageView icon;
-        switch(c){
+        switch (c) {
             case BLUE:
                 icon = setIcon(16, 16, blueSq);
                 break;
@@ -207,10 +230,62 @@ public class MainScreenController implements Initializable {
     @NotNull
     private String getAddressQuery() throws InvalidQueryException {
         String query = addressSearchField.getText();
-        if (query.equals("")) {
+        if (isEmptyString(query)) {
             throw new InvalidQueryException("Query cannot be blank");
         }
         return query;
+    }
+
+    public void saveProject(ActionEvent actionEvent) {
+        try {
+            setProjectFields();
+            Gson gson = new Gson();
+            String json = gson.toJson(GUI.project);
+            System.out.println(json);
+        } catch (InvalidProjectFieldException e) {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+
+    private void setProjectFields() throws InvalidProjectFieldException {
+        setProjectNumber();
+        setProjectManager();
+        setDate();
+    }
+
+    private void setProjectNumber() throws InvalidProjectFieldException {
+        String number = pNumber.getText();
+        if (!isEmptyString(number)) {
+            GUI.project.setNumber(number);
+        } else {
+            throw new InvalidProjectFieldException("Please enter a valid project number.");
+        }
+    }
+
+    private void setProjectManager() throws InvalidProjectFieldException {
+        String manager = pManager.getText();
+        if (!isEmptyString(manager)) {
+            GUI.project.setManager(manager);
+        } else {
+            throw new InvalidProjectFieldException("Please enter a valid project manager");
+        }
+    }
+
+    private void setDate() throws InvalidProjectFieldException {
+        try {
+            LocalDate date = dateField.getValue();
+            System.out.println(date);
+            GUI.project.setDate(date);
+        } catch (Exception e) {
+            throw new InvalidProjectFieldException("Please enter a valid project date");
+        }
+
+    }
+
+    private boolean isEmptyString(String s) {
+        return s.equals("");
     }
 
 
@@ -309,9 +384,9 @@ public class MainScreenController implements Initializable {
                 } else {
                     setText(getString());
                     setGraphic(getTreeItem().getGraphic());
-                    if (getTreeItem().getClass()==BHTreeItem.class &&getTreeItem().getParent()!= null){
+                    if (getTreeItem().getClass() == BHTreeItem.class && getTreeItem().getParent() != null) {
                         setContextMenu(addSampleMenu);
-                    } else if (getTreeItem().getClass()==SampleTreeItem.class &&getTreeItem().getClass()!=null){
+                    } else if (getTreeItem().getClass() == SampleTreeItem.class && getTreeItem().getClass() != null) {
                         setContextMenu(removeSampleMenu);
                     }
                 }

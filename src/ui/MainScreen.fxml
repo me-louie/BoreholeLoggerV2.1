@@ -31,7 +31,7 @@
                                     <buttons>
                                         <Button id="addBH" fx:id="addBH" mnemonicParsing="false" onAction="#openBHPopUp" text="New Location" />
                                         <Button id="deleteBH" fx:id="deleteBH" mnemonicParsing="false" onAction="#removeBH" text="Delete Location" />
-                                        <Button id="saveAll" fx:id="saveAll" defaultButton="true" mnemonicParsing="false" text="Save" />
+                                        <Button id="saveAll" fx:id="saveAll" defaultButton="true" mnemonicParsing="false" text="Save" onAction="#saveProject" />
 
                                     </buttons>
                                 </ButtonBar>
@@ -56,7 +56,7 @@
                                         <TextField id="pNumber" fx:id="pNumber" GridPane.columnIndex="1" />
                                         <TextField id="pManager" fx:id="pManager" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <TextField id="pAddress" fx:id="pAddress" GridPane.columnIndex="3" />
-                                        <DatePicker id="dateField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                        <DatePicker id="dateField" fx:id="dateField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                     </children>
                                 </GridPane>
                             </top>
@@ -83,7 +83,7 @@
                      <bottom>
                         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <buttons>
-                              <Button defaultButton="true" mnemonicParsing="false" text="Save" />
+                              <Button defaultButton="true" mnemonicParsing="false" text="Save"/>
                           </buttons>
                         </ButtonBar>
                      </bottom>
