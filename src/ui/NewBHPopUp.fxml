@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewBHPopUpController">
+    <bottom>
+        <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <buttons>
+                <Button id="cancelButton" fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#closePopUp" text="Cancel" />
+                <Button id="submitButton" fx:id="submitButton" defaultButton="true" mnemonicParsing="false" onAction="#setNewBHID" text="Submit" />
+            </buttons>
+        </ButtonBar>
+    </bottom>
+    <center>
+      <VBox alignment="CENTER" prefHeight="105.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+              <TextField id="boreholeID" fx:id="boreholeID" alignment="TOP_LEFT" prefHeight="1.0" prefWidth="300.0" text="BH" />
+            <Text id="err" fx:id="err" fill="#f20606" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </VBox>
+    </center>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

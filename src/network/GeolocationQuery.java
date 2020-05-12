@@ -1,5 +1,6 @@
 package network;
 
+import exceptions.InvalidQueryException;
 import org.json.JSONException;
 
 import java.io.BufferedReader;

@@ -1,12 +1,14 @@
 package network;
 
+import exceptions.InvalidQueryException;
+import model.Coordinates;
 import org.json.JSONException;
 
 public class GeolocationManager {
 
-    private String longitude;
-    private String latitude;
 
+
+    private Coordinates coordinates;
     private SiteMap siteMap;
 
     public GeolocationManager(String query) throws JSONException, InvalidQueryException {
@@ -14,15 +16,24 @@ public class GeolocationManager {
         String response = locationQuery.getResponse();
         GeolocationParser geoParser = new GeolocationParser(response);
 
-        this.latitude = geoParser.getLatitude();
-        this.longitude = geoParser.getLongitude();
+        this.coordinates = new Coordinates(geoParser.getLatitude(), geoParser.getLongitude());
+//        this.coordinates.setLat(geoParser.getLatitude());
+//        this.coordinates.setLon(geoParser.getLongitude());
     }
 
     public String getLongitude() {
-        return this.longitude;
+        return this.coordinates.getLon();
     }
 
     public String getLatitude() {
-        return this.latitude;
+        return this.coordinates.getLat();
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 }

@@ -1,0 +1,1 @@
+{"number":"123.45","manager":"miki","address":"","date":{"year":2020,"month":5,"day":11},"boreholes":[{"id":"BH","soilSamples":[{"id":"1","begDepth":1,"endDepth":1,"colour":"BROWN","strat":"CLAY","moisture":"DRY","odour":false}]}]}

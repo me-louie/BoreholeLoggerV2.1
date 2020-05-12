@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BoreholeManagerController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.old.BoreholeManagerController">
     <bottom>
         <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <buttons>
@@ -53,7 +53,7 @@
                 <TextField id="pNumber" fx:id="pNumber" prefHeight="26.0" prefWidth="294.0" styleClass="header" GridPane.columnIndex="1" />
                 <TextField id="ppAddress" fx:id="ppAddress" styleClass="header" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField id="pManager" fx:id="pManager" styleClass="header" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <DatePicker id="pDate" prefHeight="26.0" prefWidth="313.0" styleClass="header" GridPane.columnIndex="3" />
+                <DatePicker id="pDate" styleClass="header" GridPane.columnIndex="3" />
                 <TextField id="pLocation" styleClass="header" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                 <ComboBox id="pMethod" fx:id="pMethod" prefHeight="28.0" prefWidth="314.0" styleClass="header" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             </children>
@@ -63,12 +63,12 @@
         </GridPane>
     </top>
     <stylesheets>
-        <URL value="@stylesheets/BoreholeManager.css" />
+        <URL value="@../stylesheets/BoreholeManager.css" />
     </stylesheets>
     <center>
-        <ScrollPane prefHeight="260.0" prefWidth="501.0" BorderPane.alignment="CENTER">
+        <ScrollPane BorderPane.alignment="CENTER">
             <content>
-                <TreeView id="tree" fx:id="tree" prefHeight="256.0" prefWidth="582.0">
+                <TreeView id="tree" fx:id="tree" minHeight="-Infinity" minWidth="-Infinity">
                     <TreeItem fx:id="root" value="Boreholes" />
                 </TreeView>
             </content>
