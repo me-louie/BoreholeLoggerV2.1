@@ -1,5 +1,7 @@
 package ui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -119,6 +121,18 @@ public class MainScreenController implements Initializable {
                 return new MainScreenController.TextFieldTreeCellImpl();
             }
         });
+        pAddress.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                addressSearchField.setText(newValue);
+            }
+        });
+        addressSearchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                pAddress.setText(newValue);
+            }
+        });
 
     }
 
@@ -157,7 +171,6 @@ public class MainScreenController implements Initializable {
             Coordinates coordinates = getLatLon(query);
             setLatLonText(coordinates);
             Image mapImg = getSetMapImg(coordinates);
-
             sMap.setImage(mapImg);
 
         } catch (InvalidQueryException | JSONException | FileNotFoundException e) {

@@ -9,10 +9,6 @@ public class GeolocationManager {
 
 
     private Coordinates coordinates;
-
-//    private String longitude;
-//    private String latitude;
-
     private SiteMap siteMap;
 
     public GeolocationManager(String query) throws JSONException, InvalidQueryException {
@@ -20,9 +16,9 @@ public class GeolocationManager {
         String response = locationQuery.getResponse();
         GeolocationParser geoParser = new GeolocationParser(response);
 
-        this.coordinates = new Coordinates();
-        this.coordinates.setLat(geoParser.getLatitude());
-        this.coordinates.setLon(geoParser.getLongitude());
+        this.coordinates = new Coordinates(geoParser.getLatitude(), geoParser.getLongitude());
+//        this.coordinates.setLat(geoParser.getLatitude());
+//        this.coordinates.setLon(geoParser.getLongitude());
     }
 
     public String getLongitude() {
